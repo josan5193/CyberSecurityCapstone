@@ -16,6 +16,20 @@ def create_voterdb():
         sheet["A"+str((x+1))] = name
 
     workbook.save(filename="Reg_VoterDB.xlsx")
+    
+#Used to place the presidential votes for each registered voter
+def creat_voterselect():
+    workbook2 =  workbook2()
+    sheet2 = workbook2.active
+    
+    presnum = int(input('Enter presidential canidate number: '))
+    for x in range(presnum):
+        print('Number ', x+1)
+        number = input('Enter number: ')
+        sheet2["A"+str((x=1))] = number
+       
+    workbook2.save(filename="Reg_VoterSelect.xlsx")
+                  
 
 
 #Reads the name database and returns it to main function
@@ -28,9 +42,23 @@ def read_db():
     #print(sheet['A3'].value)
     return wb
 
+#Reads the number for each voter selection and return it to main
+def read_db():
+    wb2 = load_workbook2("Reg_VoterSelect.xlsx")
+    #print(wb.sheetnames)
+    sheet2 = wb2['Sheet 2']
+    #print(sheet2['A1'].value)
+    #print(sheet2['A3'].value)
+    #print(sheet2['A3'].value)
+    return wb2
+
 #Writes all contents of the modified wb to the database file
 def write_db(wb):
     wb.save("Reg_VoterDB.xlsx")
+   
+#Writes all contents of the modified wb2 to the database file
+def write_db(wb2):
+    wb2.save("Reg_VoterSelect.xlsx")
 
 
 def testmain():
@@ -39,6 +67,12 @@ def testmain():
     print(sheet['A3'].value)
     sheet['A4'] = 'Test'
     write_db(wb)
+    
+    wb2 = read_db()
+    sheet2 = wb2['sheet 2']
+    print(sheet['A3'].value)
+    sheet['A4'] = '2'
+    write_db(wb2)
 
     
     
