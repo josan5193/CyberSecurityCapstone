@@ -2,7 +2,7 @@
 #You must type 'pip install openpyxl'
 #Also make sure the database file is in same file as code
 from openpyxl import *
-
+import sha256
 #used to mass enter users into database
 #Warning using this function resets database names so be careful use only once
 def create_voterdb():
@@ -29,7 +29,18 @@ def creat_voterselect():
         sheet2["A"+str((x=1))] = number
        
     workbook2.save(filename="Reg_VoterSelect.xlsx")
-                  
+    
+def creat_hashfile():
+    workbook3 =  workbook3()
+    sheet3 = workbook3.active
+    
+    HASHEDSTRING = "print(HashedString.hexdigest())"
+    for x in range(presnum):
+        print('Number ', x+1)
+        number = input('Enter number: ')
+        sheet2["A"+str((x=1))] = number
+       
+    workbook3.save(filename="Reg_HashFile.xlsx")
 
 
 #Reads the name database and returns it to main function
@@ -52,6 +63,15 @@ def read_db():
     #print(sheet2['A3'].value)
     return wb2
 
+def read_db():
+    wb3 = load_workbook3("Reg_HashFile.xlsx")
+    #print(wb.sheetnames)
+    sheet3 = wb3['Sheet 3']
+    #print(sheet2['A1'].value)
+    #print(sheet2['A3'].value)
+    #print(sheet2['A3'].value)
+    return wb3
+
 #Writes all contents of the modified wb to the database file
 def write_db(wb):
     wb.save("Reg_VoterDB.xlsx")
@@ -59,6 +79,9 @@ def write_db(wb):
 #Writes all contents of the modified wb2 to the database file
 def write_db(wb2):
     wb2.save("Reg_VoterSelect.xlsx")
+    
+def write_db(wb3):
+    wb3.save("Reg_VoterSelect.xlsx")
 
 
 def testmain():
@@ -73,6 +96,12 @@ def testmain():
     print(sheet['A3'].value)
     sheet['A4'] = '2'
     write_db(wb2)
+    
+        wb3 = read_db()
+    sheet3 = wb3['sheet 3']
+    print(sheet['A3'].value)
+    sheet['A4'] = '3'
+    write_db(wb3)
 
     
     
