@@ -1,6 +1,7 @@
 #simple sha256 hash for the input of any string like a name or whatever
 #hashlib module
 import hashlib
+import CapstoneMain
 import CreateNameDB
 
 Test1Word = "Test1Word"
